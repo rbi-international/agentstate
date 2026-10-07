@@ -7,11 +7,12 @@ retaining useful execution signals and reducing source-identity leakage.
 **Status:** candidate research direction. Novelty and effectiveness are not
 established. The authoritative research protocol is
 [docs/EXPERIMENT_BASE.md](docs/EXPERIMENT_BASE.md). Its schemas are conceptual
-and labeling strategies are proposed; neither is validated or operationally finalized.
+and labeling strategies are proposed. Executable structural contracts are now
+implemented; their scientific adequacy and labeling rules remain unvalidated.
 
-The current stage is **project foundation**, followed by protocol
-operationalization and two-trace validation. Schemas, manifest requirements,
-label definitions, and validation criteria need operationalization before runs.
+The current stage is **data contracts and a draft experiment manifest**, following
+project foundation. Manifest values, label definitions, and validation criteria
+still need resolution before two-trace validation.
 
 ## Pilot and first experiment
 
@@ -47,7 +48,7 @@ AgentState/
 │   ├── schemas/
 │   └── validation/
 ├── configs/{experiments,frameworks,models,tasks}/
-├── docs/EXPERIMENT_BASE.md
+├── docs/{EXPERIMENT_BASE,DATA_CONTRACTS}.md
 ├── experiments/
 │   ├── stage01_trace_validation/
 │   ├── stage02_micro_pilot/
@@ -59,10 +60,13 @@ AgentState/
 
 Implemented foundation: packaging/dependency configuration, Git ignore rules,
 research protocol, project instructions, minimal package initializer, and directory
-placeholders. Component directories currently contain placeholders only.
-Validated schemas, labeling logic, providers, collectors, adapters, normalization,
+placeholders. Pydantic contracts, generated JSON Schemas, a draft manifest,
+an allowlisted encoder-input projection, and synthetic contract tests are also
+implemented; see [docs/DATA_CONTRACTS.md](docs/DATA_CONTRACTS.md) for commands
+and provisional interpretations. Other component directories remain placeholders.
+Labeling logic, providers, collectors, adapters, normalization,
 baselines, encoders, training, probes, retrieval, and evaluation remain planned.
-There are no tests or experimental results yet.
+There are no experimental results yet; synthetic tests are software checks only.
 
 Generated installation metadata (`*.egg-info/`), data, reports, weights, and
 checkpoints are ignored by Git. Generated artifacts require separate storage;

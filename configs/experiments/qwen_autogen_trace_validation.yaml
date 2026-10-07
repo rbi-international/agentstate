@@ -1,0 +1,51 @@
+# DRAFT configuration, not a run record or experimental evidence.
+# null means unresolved; resolve every required value before run-readiness review.
+manifest_version: '0.1'
+experiment_id: qwen_autogen_trace_validation
+experiment_version: '0.1-draft'
+protocol_version: '0.1'
+status: draft
+model:
+  checkpoint: Qwen3-4B-Instruct-2507
+  revision: null
+  quantization: null
+  license: null
+framework:
+  name: AutoGen
+  version: null
+inference_engine:
+  name: null
+  version: null
+task:
+  benchmark: SWE-bench Lite
+  dataset_revision: null
+  instance_id: null
+prompt_template_version: null
+sampling:
+  temperature: null
+  top_p: null
+  top_k: null
+  seed: null
+  seed_controllable: null
+context_limit: null
+tools: null
+budgets:
+  timeout_seconds: null
+  max_steps: null
+  max_tool_calls: null
+  max_input_tokens: null
+  max_output_tokens: null
+git_commit: null
+hardware:
+  os: null
+  cpu: null
+  ram_bytes: null
+  accelerator: null
+  accelerator_memory_bytes: null
+evaluator:
+  name: null
+  version: null
+timestamps:
+  created_at: null
+  started_at: null
+  ended_at: null

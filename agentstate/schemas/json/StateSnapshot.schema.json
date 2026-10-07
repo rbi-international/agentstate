@@ -1,0 +1,366 @@
+{
+  "$defs": {
+    "EventDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "enum": [
+            "reasoning",
+            "action",
+            "tool_call",
+            "observation",
+            "environment_change",
+            "final"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "execution_status": {
+          "enum": [
+            "success",
+            "failure",
+            "partial",
+            "unknown"
+          ],
+          "title": "Execution Status",
+          "type": "string"
+        },
+        "semantic_content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Semantic Content"
+        },
+        "tool_family": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tool Family"
+        },
+        "tool_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tool Name"
+        }
+      },
+      "required": [
+        "event_type",
+        "semantic_content",
+        "tool_family",
+        "tool_name",
+        "execution_status"
+      ],
+      "title": "EventDetails",
+      "type": "object"
+    },
+    "ExecutionState": {
+      "additionalProperties": false,
+      "properties": {
+        "active_error_signatures": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Active Error Signatures",
+          "type": "array"
+        },
+        "files_inspected_count": {
+          "minimum": 0,
+          "title": "Files Inspected Count",
+          "type": "integer"
+        },
+        "files_modified_count": {
+          "minimum": 0,
+          "title": "Files Modified Count",
+          "type": "integer"
+        },
+        "repeated_action_score": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Repeated Action Score"
+        },
+        "test_delta": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Previous comparable failing-test count minus current failing-test count. Positive means fewer failures; negative means more failures. Observation, not a behavioral label. Must be null when comparability is unknown; the integer contract does not enforce measurement provenance.",
+          "title": "Test Delta"
+        },
+        "tests_failed": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tests Failed"
+        },
+        "tests_passed": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tests Passed"
+        },
+        "tool_failures": {
+          "minimum": 0,
+          "title": "Tool Failures",
+          "type": "integer"
+        },
+        "tool_successes": {
+          "minimum": 0,
+          "title": "Tool Successes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "files_inspected_count",
+        "files_modified_count",
+        "tests_passed",
+        "tests_failed",
+        "test_delta",
+        "tool_successes",
+        "tool_failures",
+        "repeated_action_score",
+        "active_error_signatures"
+      ],
+      "title": "ExecutionState",
+      "type": "object"
+    },
+    "FutureOutcome": {
+      "additionalProperties": false,
+      "properties": {
+        "eventual_success": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Eventual Success"
+        },
+        "future_recovery_observed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Future Recovery Observed"
+        },
+        "steps_to_terminal": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Steps To Terminal"
+        },
+        "tokens_to_terminal": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tokens To Terminal"
+        }
+      },
+      "required": [
+        "eventual_success",
+        "steps_to_terminal",
+        "tokens_to_terminal",
+        "future_recovery_observed"
+      ],
+      "title": "FutureOutcome",
+      "type": "object"
+    },
+    "ResourceState": {
+      "additionalProperties": false,
+      "properties": {
+        "cumulative_input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cumulative Input Tokens"
+        },
+        "cumulative_output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cumulative Output Tokens"
+        },
+        "cumulative_tool_calls": {
+          "minimum": 0,
+          "title": "Cumulative Tool Calls",
+          "type": "integer"
+        },
+        "elapsed_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Elapsed Ms"
+        }
+      },
+      "required": [
+        "cumulative_input_tokens",
+        "cumulative_output_tokens",
+        "cumulative_tool_calls",
+        "elapsed_ms"
+      ],
+      "title": "ResourceState",
+      "type": "object"
+    },
+    "SemanticState": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Agent Summary"
+        },
+        "recent_events": {
+          "items": {
+            "$ref": "#/$defs/EventDetails"
+          },
+          "title": "Recent Events",
+          "type": "array"
+        }
+      },
+      "required": [
+        "recent_events",
+        "agent_summary"
+      ],
+      "title": "SemanticState",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "execution_state": {
+      "$ref": "#/$defs/ExecutionState"
+    },
+    "future_outcome": {
+      "$ref": "#/$defs/FutureOutcome"
+    },
+    "resource_state": {
+      "$ref": "#/$defs/ResourceState"
+    },
+    "semantic_state": {
+      "$ref": "#/$defs/SemanticState"
+    },
+    "state_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "State Id",
+      "type": "string"
+    },
+    "step": {
+      "minimum": 0,
+      "title": "Step",
+      "type": "integer"
+    },
+    "task_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "trajectory_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Trajectory Id",
+      "type": "string"
+    },
+    "trajectory_prefix_ref": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Trajectory Prefix Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "state_id",
+    "trajectory_id",
+    "task_id",
+    "step",
+    "trajectory_prefix_ref",
+    "semantic_state",
+    "execution_state",
+    "resource_state",
+    "future_outcome"
+  ],
+  "title": "StateSnapshot",
+  "type": "object"
+}

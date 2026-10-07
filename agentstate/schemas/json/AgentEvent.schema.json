@@ -1,0 +1,373 @@
+{
+  "$defs": {
+    "Environment": {
+      "additionalProperties": false,
+      "properties": {
+        "error_signatures": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Error Signatures",
+          "type": "array"
+        },
+        "files_inspected": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Files Inspected",
+          "type": "array"
+        },
+        "files_modified": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Files Modified",
+          "type": "array"
+        },
+        "new_failures": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "New Failures"
+        },
+        "patch_summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Patch Summary"
+        },
+        "resolved_failures": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Resolved Failures"
+        },
+        "tests_failed": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tests Failed"
+        },
+        "tests_passed": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tests Passed"
+        }
+      },
+      "required": [
+        "files_inspected",
+        "files_modified",
+        "tests_passed",
+        "tests_failed",
+        "new_failures",
+        "resolved_failures",
+        "error_signatures",
+        "patch_summary"
+      ],
+      "title": "Environment",
+      "type": "object"
+    },
+    "EventDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "enum": [
+            "reasoning",
+            "action",
+            "tool_call",
+            "observation",
+            "environment_change",
+            "final"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "execution_status": {
+          "enum": [
+            "success",
+            "failure",
+            "partial",
+            "unknown"
+          ],
+          "title": "Execution Status",
+          "type": "string"
+        },
+        "semantic_content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Semantic Content"
+        },
+        "tool_family": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tool Family"
+        },
+        "tool_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tool Name"
+        }
+      },
+      "required": [
+        "event_type",
+        "semantic_content",
+        "tool_family",
+        "tool_name",
+        "execution_status"
+      ],
+      "title": "EventDetails",
+      "type": "object"
+    },
+    "Outcome": {
+      "additionalProperties": false,
+      "properties": {
+        "final_success": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Success"
+        },
+        "terminal": {
+          "title": "Terminal",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "terminal",
+        "final_success"
+      ],
+      "title": "Outcome",
+      "type": "object"
+    },
+    "Resources": {
+      "additionalProperties": false,
+      "properties": {
+        "cumulative_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cumulative Tokens"
+        },
+        "elapsed_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Elapsed Ms"
+        },
+        "input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Tokens"
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Output Tokens"
+        },
+        "tool_calls": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tool Calls"
+        }
+      },
+      "required": [
+        "input_tokens",
+        "output_tokens",
+        "cumulative_tokens",
+        "tool_calls",
+        "elapsed_ms"
+      ],
+      "title": "Resources",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "framework_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Framework Id",
+          "type": "string"
+        },
+        "framework_version": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Framework Version",
+          "type": "string"
+        },
+        "model_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Model Id",
+          "type": "string"
+        },
+        "model_revision": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Model Revision",
+          "type": "string"
+        },
+        "run_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model_id",
+        "model_revision",
+        "framework_id",
+        "framework_version",
+        "run_id",
+        "seed"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "environment": {
+      "$ref": "#/$defs/Environment"
+    },
+    "event": {
+      "$ref": "#/$defs/EventDetails"
+    },
+    "outcome": {
+      "$ref": "#/$defs/Outcome"
+    },
+    "resources": {
+      "$ref": "#/$defs/Resources"
+    },
+    "schema_version": {
+      "const": "0.1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Source"
+    },
+    "step_id": {
+      "minimum": 0,
+      "title": "Step Id",
+      "type": "integer"
+    },
+    "task_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "trajectory_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Trajectory Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "trajectory_id",
+    "task_id",
+    "step_id",
+    "source",
+    "event",
+    "environment",
+    "resources",
+    "outcome"
+  ],
+  "title": "AgentEvent",
+  "type": "object"
+}
